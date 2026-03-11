@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIDI Control Panel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a0a;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .panel {
+            width: 320px;
+            background-color: #1a1a2e;
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+
+        .header-title {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        .header-code {
+            color: #ff2d55;
+            font-size: 10px;
+            font-family: monospace;
+        }
+
+        .row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .field {
+            flex: 1;
+            position: relative;
+        }
+
+        .field-label {
+            color: #6e7681;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .field-value {
+            background-color: #0d1421;
+            border-radius: 8px;
+            padding: 10px 12px;
+            color: #fff;
+            font-size: 14px;
+            text-align: center;
+            border: 1px solid #2d3748;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .field-value:hover {
+            border-color: #00d4ff;
+        }
+
+        .field-value.blue {
+            color: #00d4ff;
+            font-weight: 500;
+        }
+
+        .field-value .arrow {
+            font-size: 10px;
+            opacity: 0.5;
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #0d1421;
+            border: 1px solid #2d3748;
+            border-radius: 8px;
+            margin-top: 4px;
+            z-index: 100;
+            display: none;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .dropdown.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            padding: 10px 12px;
+            color: #fff;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dropdown-item:hover {
+            background: #1e2940;
+        }
+
+        .dropdown-item.selected {
+            color: #00d4ff;
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .dropdown-item .code {
+            font-family: monospace;
+            font-size: 10px;
+            color: #6e7681;
+        }
+
+        /* Footer */
+        .footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+        }
+
+        .save-btn {
+            background-color: #ff2d55;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .save-btn:hover {
+            transform: scale(1.02);
+            background-color: #ff4d6d;
+        }
+
+        .icons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: all 0.2s;
+        }
+
+        .icon:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Scrollbar */
+        .dropdown::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .dropdown::-webkit-scrollbar-track {
+            background: #0d1421;
+        }
+
+        .dropdown::-webkit-scrollbar-thumb {
+            background: #2d3748;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="panel">
+        <div class="header">
+            <span class="header-title">MIDI CONTROL</span>
+            <span class="header-code" id="timeCode">#B0</span>
+        </div>
+
+        <div class="row">
+            <div class="field">
+                <label class="field-label">Channel</label>
+                <div class="field-value" id="channelValue" onclick="toggleDropdown('channelDropdown')">
+                    <span>1</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="dropdown" id="channelDropdown"></div>
+            </div>
+            <div class="field">
+                <label class="field-label">Msg. Type</label>
+                <div class="field-value blue" id="msgTypeValue" onclick="toggleDropdown('msgTypeDropdown')">
+                    <span>CC</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="dropdown" id="msgTypeDropdown"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="field">
+                <label class="field-label" id="param1Label">CC #</label>
+                <div class="field-value" id="param1Value" onclick="toggleDropdown('param1Dropdown')">
+                    <span>1</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="dropdown" id="param1Dropdown"></div>
+            </div>
+            <div class="field">
+                <label class="field-label" id="param2Label">Value</label>
+                <div class="field-value" id="param2Value" onclick="toggleDropdown('param2Dropdown')">
+                    <span>127</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="dropdown" id="param2Dropdown"></div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <button class="save-btn" onclick="save()">Save</button>
+            <div class="icons">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+                    </svg>
+                </div>
+                <div class="icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2"/>
+                        <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+                    </svg>
+                </div>
+                <div class="icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#ff2d55" stroke-width="2">
+                        <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // All MIDI Message Types
+        const MSG_TYPES = [
+            { name: "Note Off", code: 0x80, param1: "Note", param2: "Velocity" },
+            { name: "Note On", code: 0x90, param1: "Note", param2: "Velocity" },
+            { name: "Poly AT", code: 0xA0, param1: "Note", param2: "Value" },
+            { name: "CC", code: 0xB0, param1: "CC #", param2: "Value" },
+            { name: "PC", code: 0xC0, param1: "Program #", param2: "-" },
+            { name: "Channel AT", code: 0xD0, param1: "Value", param2: "-" },
+            { name: "Pitch Bend", code: 0xE0, param1: "LSB", param2: "MSB" },
+            { name: "Clock", code: 0xF8, param1: "-", param2: "-" },
+            { name: "Start", code: 0xFA, param1: "-", param2: "-" },
+            { name: "Continue", code: 0xFB, param1: "-", param2: "-" },
+            { name: "Stop", code: 0xFC, param1: "-", param2: "-" },
+        ];
+
+        let state = {
+            channel: 1,
+            msgType: "CC",
+            param1: 1,
+            param2: 127,
+        };
+
+        // Initialize
+        function init() {
+            // Channel dropdown (1-16)
+            const channelDropdown = document.getElementById('channelDropdown');
+            for (let i = 1; i <= 16; i++) {
+                const item = createDropdownItem(i, i.toString(), null, () => selectChannel(i));
+                channelDropdown.appendChild(item);
+            }
+
+            // Msg Type dropdown
+            const msgTypeDropdown = document.getElementById('msgTypeDropdown');
+            MSG_TYPES.forEach((type, idx) => {
+                const item = createDropdownItem(
+                    type.name, 
+                    type.code.toString(16).toUpperCase().padStart(2, '0'),
+                    () => type.name === 'CC', 
+                    () => selectMsgType(type)
+                );
+                msgTypeDropdown.appendChild(item);
+            });
+
+            // Param1 dropdown (0-127)
+            const param1Dropdown = document.getElementById('param1Dropdown');
+            for (let i = 0; i <= 127; i++) {
+                const item = createDropdownItem(i, i.toString(), null, () => selectParam1(i));
+                param1Dropdown.appendChild(item);
+            }
+
+            // Param2 dropdown (0-127)
+            const param2Dropdown = document.getElementById('param2Dropdown');
+            for (let i = 0; i <= 127; i++) {
+                const item = createDropdownItem(i, i.toString(), null, () => selectParam2(i));
+                param2Dropdown.appendChild(item);
+            }
+
+            updateUI();
+        }
+
+        function createDropdownItem(label, code, isSelected, onClick) {
+            const item = document.createElement('div');
+            item.className = 'dropdown-item' + (isSelected ? ' selected' : '');
+            item.innerHTML = `<span>${label}</span>${code ? `<span class="code">#${code}</span>` : ''}`;
+            item.onclick = onClick;
+            return item;
+        }
+
+        function toggleDropdown(dropdownId) {
+            closeAll();
+            document.getElementById(dropdownId).classList.toggle('show');
+        }
+
+        function closeAll() {
+            document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('show'));
+        }
+
+        function selectChannel(val) {
+            state.channel = val;
+            closeAll();
+            updateUI();
+        }
+
+        function selectMsgType(typeObj) {
+            state.msgType = typeObj.name;
+            // Reset param values based on type
+            if (typeObj.param1 === "-") {
+                state.param1 = 0;
+            }
+            if (typeObj.param2 === "-") {
+                state.param2 = 0;
+            }
+            closeAll();
+            updateUI();
+        }
+
+        function selectParam1(val) {
+            state.param1 = val;
+            closeAll();
+            updateUI();
+        }
+
+        function selectParam2(val) {
+            state.param2 = val;
+            closeAll();
+            updateUI();
+        }
+
+        function updateUI() {
+            // Get current msg type info
+            const currentType = MSG_TYPES.find(t => t.name === state.msgType) || MSG_TYPES[3];
+            
+            // Update display values
+            document.querySelector('#channelValue span:first-child').textContent = state.channel;
+            document.querySelector('#msgTypeValue span:first-child').textContent = state.msgType;
+            document.querySelector('#param1Value span:first-child').textContent = currentType.param1 === "-" ? "-" : state.param1;
+            document.querySelector('#param2Value span:first-child').textContent = currentType.param2 === "-" ? "-" : state.param2;
+
+            // Update labels
+            document.getElementById('param1Label').textContent = currentType.param1;
+            document.getElementById('param2Label').textContent = currentType.param2;
+
+            // Update time code
+            document.getElementById('timeCode').textContent = '#' + currentType.code.toString(16).toUpperCase().padStart(2, '0');
+
+            // Update selected states
+            updateDropdownSelection('channelDropdown', state.channel - 1);
+            updateDropdownSelection('msgTypeDropdown', MSG_TYPES.findIndex(t => t.name === state.msgType));
+            updateDropdownSelection('param1Dropdown', state.param1);
+            updateDropdownSelection('param2Dropdown', state.param2);
+        }
+
+        function updateDropdownSelection(dropdownId, index) {
+            const dropdown = document.getElementById(dropdownId);
+            Array.from(dropdown.children).forEach((item, i) => {
+                item.classList.toggle('selected', i === index);
+            });
+        }
+
+        function save() {
+            const currentType = MSG_TYPES.find(t => t.name === state.msgType);
+            const midiMessage = {
+                channel: state.channel,
+                type: state.msgType,
+                timeCode: currentType.code,
+                param1: state.param1,
+                param2: state.param2,
+            };
+            console.log('Saved:', midiMessage);
+            alert('Saved!\n' + JSON.stringify(midiMessage, null, 2));
+        }
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.field')) {
+                closeAll();
+            }
+        });
+
+        init();
+    </script>
+</body>
+</html>
