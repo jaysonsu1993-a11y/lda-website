@@ -24,16 +24,23 @@ interface MidiState {
 }
 
 // 组件A: 单个 MIDI 通道面板
-function MidiChannelPanel({ channel }: { channel: number | null }) {
+function MidiChannelPanel() {
   const [state, setState] = useState<MidiState>({
-    channel: channel ?? 0,
+    channel: 0, // 0 means "-"
     msgType: "CC",
     param1: 1,
     param2: 127,
   });
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
+  // Channel display: "-" if 0, otherwise "CH.X"
+  const channelDisplay = state.channel === 0 ? "-" : `CH.${state.channel}`;
+  const dropdownId = `channel-${state.channel}`;
+
   const currentType = MSG_TYPES.find((t) => t.name === state.msgType) || MSG_TYPES[3];
+
+  // Channel options: "-" option + CH.1 - CH.16
+  const channelOptions = [0, ...Array.from({ length: 16 }, (_, i) => i + 1)];
 
   const selectMsgType = (typeObj: typeof MSG_TYPES[0]) => {
     setState({
@@ -71,20 +78,43 @@ function MidiChannelPanel({ channel }: { channel: number | null }) {
 
   return (
     <div className="flex items-center gap-1 py-2 px-2 bg-[#1a1a2e] rounded border border-[#2d3748] text-base">
-      {/* Channel */}
-      <div className="text-[#00d4ff] text-sm font-mono w-8 text-center shrink-0">
-        {channel !== null ? channel : "-"}
+      {/* Channel Selector */}
+      <div className="relative">
+        <button
+          onClick={() => toggleDropdown(dropdownId)}
+          className="text-sm text-[#00d4ff] hover:text-white transition-colors font-mono w-10 text-center"
+        >
+          {channelDisplay}
+        </button>
+        {openDropdown === dropdownId && (
+          <div className="absolute top-full left-0 bg-[#0d1421] border border-[#2d3748] rounded z-50 max-h-40 overflow-y-auto min-w-[60px]">
+            {channelOptions.map((ch) => (
+              <button
+                key={ch}
+                onClick={() => {
+                  setState({ ...state, channel: ch });
+                  setOpenDropdown(null);
+                }}
+                className={`w-full px-2 py-1 text-sm text-left hover:bg-[#1e2940] font-mono ${
+                  state.channel === ch ? "text-[#00d4ff]" : "text-white"
+                }`}
+              >
+                {ch === 0 ? "-" : `CH.${ch}`}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Msg Type */}
       <div className="relative">
         <button
-          onClick={() => toggleDropdown(`type-${channel}`)}
+          onClick={() => toggleDropdown(`type-${state.channel}`)}
           className="text-sm text-[#00d4ff] hover:text-white transition-colors px-1"
         >
           {state.msgType.substring(0, 2)}
         </button>
-        {openDropdown === `type-${channel}` && (
+        {openDropdown === `type-${state.channel}` && (
           <div className="absolute top-full left-0 bg-[#0d1421] border border-[#2d3748] rounded z-50 max-h-32 overflow-y-auto min-w-[80px]">
             {MSG_TYPES.map((type, idx) => (
               <button
@@ -111,7 +141,7 @@ function MidiChannelPanel({ channel }: { channel: number | null }) {
           ▲
         </button>
         <button
-          onClick={() => toggleDropdown(`p1-${channel}`)}
+          onClick={() => toggleDropdown(`p1-${state.channel}`)}
           disabled={currentType.param1 === "-"}
           className="text-sm text-white hover:text-[#00d4ff] disabled:opacity-30 min-w-[28px] text-center"
         >
@@ -124,7 +154,7 @@ function MidiChannelPanel({ channel }: { channel: number | null }) {
         >
           ▼
         </button>
-        {openDropdown === `p1-${channel}` && currentType.param1 !== "-" && (
+        {openDropdown === `p1-${state.channel}` && currentType.param1 !== "-" && (
           <div className="absolute top-full left-0 bg-[#0d1421] border border-[#2d3748] rounded z-50 max-h-32 overflow-y-auto min-w-[50px]">
             {Array.from({ length: 128 }, (_, i) => i).map((i) => (
               <button
@@ -151,7 +181,7 @@ function MidiChannelPanel({ channel }: { channel: number | null }) {
           ▲
         </button>
         <button
-          onClick={() => toggleDropdown(`p2-${channel}`)}
+          onClick={() => toggleDropdown(`p2-${state.channel}`)}
           disabled={currentType.param2 === "-"}
           className="text-sm text-white hover:text-[#00d4ff] disabled:opacity-30 min-w-[28px] text-center"
         >
@@ -164,7 +194,7 @@ function MidiChannelPanel({ channel }: { channel: number | null }) {
         >
           ▼
         </button>
-        {openDropdown === `p2-${channel}` && currentType.param2 !== "-" && (
+        {openDropdown === `p2-${state.channel}` && currentType.param2 !== "-" && (
           <div className="absolute top-full left-0 bg-[#0d1421] border border-[#2d3748] rounded z-50 max-h-32 overflow-y-auto min-w-[50px]">
             {Array.from({ length: 128 }, (_, i) => i).map((i) => (
               <button
@@ -206,7 +236,7 @@ function MidiChannelRack({ rackId }: { rackId: number }) {
       
       {/* 16 Channels */}
       {Array.from({ length: 16 }, (_, i) => i).map((idx) => (
-        <MidiChannelPanel key={idx} channel={idx} />
+        <MidiChannelPanel key={idx} />
       ))}
     </div>
   );

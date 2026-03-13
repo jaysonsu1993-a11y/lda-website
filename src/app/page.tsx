@@ -27,10 +27,10 @@ export default function Home() {
       </div>
 
       {/* Navigation */}
-      <nav className="flex items-center justify-between px-4 md:px-8 lg:px-12 py-4 border-b border-[#333] w-full relative">
+      <nav className="flex items-center justify-between px-4 md:px-12 py-4 border-b border-[#333] w-full relative">
         {/* Mobile Menu Button */}
         <button 
-          className="md:hidden text-white p-2"
+          className="lg:hidden text-white p-2"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -43,14 +43,14 @@ export default function Home() {
         </button>
 
         {/* Desktop Left Links */}
-        <div className="hidden md:flex items-center gap-4 md:gap-8">
-          <Link href="#" className="text-xs md:text-sm uppercase tracking-widest hover:text-gray-400">
+        <div className="hidden lg:flex items-center gap-8">
+          <Link href="#" className="text-sm uppercase tracking-widest hover:text-gray-400">
             CATALOG
           </Link>
-          <Link href="/store" className="text-xs md:text-sm uppercase tracking-widest hover:text-gray-400">
+          <Link href="/store" className="text-sm uppercase tracking-widest hover:text-gray-400">
             STORE
           </Link>
-          <Link href="/lab" className="text-xs md:text-sm uppercase tracking-widest hover:text-gray-400">
+          <Link href="/lab" className="text-sm uppercase tracking-widest hover:text-gray-400">
             LAB
           </Link>
         </div>
@@ -62,26 +62,26 @@ export default function Home() {
             alt="Logic des Audio" 
             width={120} 
             height={50}
-            className="h-10 md:h-14 lg:h-16 w-auto object-contain"
+            className="h-10 lg:h-14 xl:h-16 w-auto object-contain"
           />
         </Link>
         
         {/* Desktop Right Links */}
-        <div className="hidden md:flex items-center gap-4 md:gap-8">
-          <Link href="/editor" className="text-xs md:text-sm uppercase tracking-widest hover:text-gray-400">
+        <div className="hidden lg:flex items-center gap-8">
+          <Link href="/editor" className="text-sm uppercase tracking-widest hover:text-gray-400">
             EDITOR
           </Link>
-          <Link href="#" className="text-xs md:text-sm uppercase tracking-widest hover:text-gray-400">
+          <Link href="#" className="text-sm uppercase tracking-widest hover:text-gray-400">
             SUPPORT
           </Link>
-          <button className="text-xs md:text-sm uppercase tracking-widest hover:text-gray-400">
+          <button className="text-sm uppercase tracking-widest hover:text-gray-400">
             LANGUAGE
           </button>
         </div>
 
         {/* Mobile Menu Dropdown */}
         {mobileMenuOpen && (
-          <div className="absolute top-full left-0 right-0 bg-[#1a1a1a] border-b border-[#333] py-4 md:hidden z-50">
+          <div className="absolute top-full left-0 right-0 bg-[#1a1a1a] border-b border-[#333] py-4 lg:hidden z-50">
             <div className="flex flex-col items-center gap-4">
               <Link href="#" className="text-xs uppercase tracking-widest hover:text-gray-400" onClick={() => setMobileMenuOpen(false)}>
                 CATALOG
@@ -107,8 +107,8 @@ export default function Home() {
       </nav>
 
       {/* Hero Section - Products */}
-      <section className="px-4 md:px-8 lg:px-12 py-8 md:py-12 w-full">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 md:gap-8 lg:gap-12 w-full">
+      <section className="px-4 md:px-12 py-8 md:py-12 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 lg:gap-12 w-full">
           {/* MS-3 - Available Now */}
           <Link href="/ms-3" className="group w-full">
             <div className="aspect-[16/9] bg-[#1a1a1a] flex flex-col items-center justify-center p-6 md:p-8 lg:p-12 border border-[#333] hover:border-gray-600 transition-colors w-full">
@@ -134,10 +134,10 @@ export default function Home() {
       </section>
 
       {/* Get Fully Control - Video Background */}
-      <section className="relative h-screen px-4 w-full">
+      <section className="relative h-screen w-full">
         {/* Video Background */}
         <video 
-          className="absolute inset-0 w-full min-w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover"
           autoPlay
           muted
           loop
@@ -147,16 +147,16 @@ export default function Home() {
         </video>
         
         {/* Overlay Content */}
-        <div className="relative z-10 h-full flex flex-col items-center justify-center translate-y-[308px] md:translate-y-[324px] lg:translate-y-[340px]">
-          <h2 className="text-4xl md:text-6xl lg:text-8xl font-light tracking-wide px-4 py-2 bg-black/30 drop-shadow-[0_0_20px_rgba(255,255,255,0.9)] drop-shadow-[0_0_40px_rgba(255,255,255,0.6)] drop-shadow-[0_0_60px_rgba(255,255,255,0.3)]">
+        <div className="relative z-10 h-full flex flex-col items-center justify-center px-4">
+          <h2 className="text-3xl md:text-5xl lg:text-7xl xl:text-8xl font-light tracking-wide text-center px-2 py-2 bg-black/30 drop-shadow-[0_0_20px_rgba(255,255,255,0.9)] drop-shadow-[0_0_40px_rgba(255,255,255,0.6)] drop-shadow-[0_0_60px_rgba(255,255,255,0.3)]">
             GET FULLY CONTROL OF
           </h2>
-          <h2 className="text-4xl md:text-6xl lg:text-8xl font-light tracking-wide mt-6 md:mt-8 lg:mt-10 px-4 py-2 bg-black/30 drop-shadow-[0_0_20px_rgba(255,255,255,0.9)] drop-shadow-[0_0_40px_rgba(255,255,255,0.6)] drop-shadow-[0_0_60px_rgba(255,255,255,0.3)]">
+          <h2 className="text-3xl md:text-5xl lg:text-7xl xl:text-8xl font-light tracking-wide mt-4 md:mt-6 lg:mt-8 text-center px-2 py-2 bg-black/30 drop-shadow-[0_0_20px_rgba(255,255,255,0.9)] drop-shadow-[0_0_40px_rgba(255,255,255,0.6)] drop-shadow-[0_0_60px_rgba(255,255,255,0.3)]">
             YOUR EFFECT CHAIN
           </h2>
           
           {/* Explore Button */}
-          <div className="mt-10 md:mt-12 lg:mt-16">
+          <div className="mt-8 md:mt-10 lg:mt-12">
             <a href="#content" className="inline-block px-6 md:px-8 py-3 md:py-4 border border-white text-xs md:text-sm uppercase tracking-widest hover:bg-white hover:text-black transition-colors">
               EXPLORE
             </a>
@@ -165,8 +165,8 @@ export default function Home() {
       </section>
 
       {/* Explore Content */}
-      <section id="content" className="px-4 md:px-8 lg:px-12 py-8 md:py-12 w-full">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 md:gap-4 lg:gap-4 w-full">
+      <section id="content" className="px-4 md:px-12 py-8 md:py-12 w-full">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 md:gap-4 w-full">
           {/* What's on Pedals */}
           <div className="aspect-square bg-[#1a1a1a] flex items-center justify-center p-2 md:p-4 border border-[#333] hover:border-gray-600 transition-colors cursor-pointer">
             <div className="text-center">
@@ -214,7 +214,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-[#333] px-4 md:px-8 lg:px-12 py-8 md:py-12 mt-8 md:mt-12 w-full">
+      <footer className="border-t border-[#333] px-4 md:px-12 py-8 md:py-12 mt-8 md:mt-12 w-full">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-full mx-auto w-full">
           {/* Newsletter */}
           <div>
