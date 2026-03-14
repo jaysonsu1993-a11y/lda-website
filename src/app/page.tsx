@@ -168,22 +168,22 @@ export default function Home() {
       <section id="content" className="px-4 md:px-12 py-8 md:py-12 w-full">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 md:gap-4 w-full">
           {/* What's on Pedals */}
-          <div className="aspect-square bg-[#1a1a1a] flex items-center justify-center p-2 md:p-4 border border-[#333] hover:border-gray-600 transition-colors cursor-pointer">
+          <Link href="/gallery" className="aspect-square bg-[#1a1a1a] flex items-center justify-center p-2 md:p-4 border border-[#333] hover:border-gray-600 transition-colors cursor-pointer">
             <div className="text-center">
               <span className="text-xs uppercase tracking-widest">WHAT'S</span>
               <div className="text-xl md:text-2xl font-bold">ON</div>
               <span className="text-xs uppercase tracking-widest">PEDALS?</span>
             </div>
-          </div>
+          </Link>
 
           {/* What's on Boards */}
-          <div className="aspect-square bg-[#1a1a1a] flex items-center justify-center p-2 md:p-4 border border-[#333] hover:border-gray-600 transition-colors cursor-pointer">
+          <Link href="/gallery" className="aspect-square bg-[#1a1a1a] flex items-center justify-center p-2 md:p-4 border border-[#333] hover:border-gray-600 transition-colors cursor-pointer">
             <div className="text-center">
               <span className="text-xs uppercase tracking-widest">WHAT'S</span>
               <div className="text-xl md:text-2xl font-bold">ON</div>
               <span className="text-xs uppercase tracking-widest">BOARDS?</span>
             </div>
-          </div>
+          </Link>
 
           {/* LdA Custom */}
           <div className="col-span-2 aspect-square bg-[#1a1a1a] flex flex-col items-center justify-center p-2 md:p-4 border border-[#333] hover:border-gray-600 transition-colors cursor-pointer">
@@ -202,14 +202,14 @@ export default function Home() {
           </div>
 
           {/* Gallery */}
-          <div className="aspect-square bg-[#1a1a1a] flex items-center justify-center p-2 md:p-4 border border-[#333] hover:border-gray-600 transition-colors cursor-pointer">
+          <Link href="/gallery" className="aspect-square bg-[#1a1a1a] flex items-center justify-center p-2 md:p-4 border border-[#333] hover:border-gray-600 transition-colors cursor-pointer">
             <span className="text-lg md:text-xl font-light uppercase tracking-widest">Gallery</span>
-          </div>
+          </Link>
 
           {/* Downloads */}
-          <div className="aspect-square bg-[#1a1a1a] flex items-center justify-center p-2 md:p-4 border border-[#333] hover:border-gray-600 transition-colors cursor-pointer">
+          <Link href="/downloads" className="aspect-square bg-[#1a1a1a] flex items-center justify-center p-2 md:p-4 border border-[#333] hover:border-gray-600 transition-colors cursor-pointer">
             <span className="text-lg md:text-xl font-light uppercase tracking-widest">Downloads</span>
-          </div>
+          </Link>
         </div>
       </section>
 
@@ -251,8 +251,8 @@ export default function Home() {
           <div>
             <h3 className="text-lg font-bold mb-4">TERMS & POLICY</h3>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li>Return Terms</li>
-              <li>Privacy Policy</li>
+              <li><Link href="/terms" className="hover:text-white transition-colors">Return Terms</Link></li>
+              <li><Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
               <li>Copyright</li>
             </ul>
           </div>
@@ -261,11 +261,11 @@ export default function Home() {
           <div>
             <h3 className="text-lg font-bold mb-4">CONTACT</h3>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li>YouTube</li>
-              <li>Email</li>
+              <li><a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">YouTube</a></li>
+              <li><a href="mailto:hello@logicdesaudio.com" className="hover:text-white transition-colors">Email</a></li>
               <li>WeChat</li>
-              <li>Instagram</li>
-              <li>TikTok</li>
+              <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Instagram</a></li>
+              <li><a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">TikTok</a></li>
             </ul>
           </div>
         </div>
