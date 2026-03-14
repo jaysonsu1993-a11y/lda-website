@@ -105,10 +105,10 @@ export default function Ms3Editor() {
         setShowImport(false);
         setImportText("");
       } else {
-        alert("Invalid format. Expected 9 presets.");
+        console.error("Invalid format. Expected 9 presets.");
       }
     } catch {
-      alert("Invalid JSON format.");
+      console.error("Invalid JSON format.");
     }
   };
 

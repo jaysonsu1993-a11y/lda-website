@@ -10,7 +10,7 @@ export default function Home() {
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`Thank you for subscribing with: ${email}`);
+    console.log(`Newsletter subscription: ${email}`);
     setEmail("");
   };
 
