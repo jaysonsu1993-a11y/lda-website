@@ -1,0 +1,273 @@
+{
+  "nav": {
+    "catalog": "产品目录",
+    "store": "商店",
+    "lab": "实验室",
+    "editor": "编辑器",
+    "support": "支持",
+    "language": "语言",
+    "gallery": "图集",
+    "downloads": "下载"
+  },
+  "banner": {
+    "shipping": "订单满 $200 免全球运费。"
+  },
+  "home": {
+    "hero": {
+      "midiSwitcher": "MIDI 控制器",
+      "loopSwitcher": "线路切换器",
+      "availableNow": "立即购买",
+      "comingSoon": "即将上市",
+      "getFullyControl": "全面掌控",
+      "yourEffectChain": "你的效果器链",
+      "explore": "探索"
+    },
+    "explore": {
+      "pedals": "效果器板上有什么？",
+      "boards": "效果器链配置",
+      "customShop": "LdA 定制",
+      "shop": "商店",
+      "midiLibrary": "MIDI",
+      "library": "资料库",
+      "gallery": "图集",
+      "downloads": "下载"
+    }
+  },
+  "footer": {
+    "newsletter": {
+      "title": "邮件订阅",
+      "subtitle": "首单享受九折优惠。",
+      "placeholder": "邮箱地址",
+      "submit": "订阅"
+    },
+    "mission": {
+      "title": "理念",
+      "design": "负责任的设计",
+      "manufacture": "负责任的制造",
+      "creativity": "创意"
+    },
+    "terms": {
+      "title": "条款与政策",
+      "return": "退货条款",
+      "privacy": "隐私政策",
+      "copyright": "版权声明"
+    },
+    "contact": {
+      "title": "联系我们",
+      "youtube": "YouTube",
+      "email": "邮箱",
+      "wechat": "微信",
+      "instagram": "Instagram",
+      "tiktok": "TikTok"
+    },
+    "copyright": "©2025 Logic des Audio"
+  },
+  "ms3": {
+    "product": {
+      "midiSwitcher": "MIDI 控制器",
+      "availableNow": "立即购买",
+      "description": "专业级 MIDI 控制器，配备 3 组线路、9 个预设，支持 USB/MIDI 连接。一台设备掌控整个效果器板。",
+      "buyNow": "立即购买 — $299",
+      "configure": "配置",
+      "specs": "规格参数",
+      "loops": "线路数",
+      "presets": "预设数",
+      "midiChannels": "MIDI 通道",
+      "connectivity": "连接方式"
+    },
+    "features": {
+      "title": "核心功能",
+      "loops": {
+        "title": "3 组效果线路",
+        "desc": "纯 bypass 线路，适配所有效果器"
+      },
+      "presets": {
+        "title": "9 个预设",
+        "desc": "即时存储和调用你的专属设置"
+      },
+      "midi": {
+        "title": "MIDI 控制",
+        "desc": "完整支持 Program Change 与 CC 控制"
+      }
+    }
+  },
+  "editor": {
+    "title": "MS-3 预设编辑器",
+    "subtitle": "配置你的预设和 MIDI 消息",
+    "back": "← 返回 MS-3",
+    "export": "导出",
+    "import": "导入",
+    "preset": "预设",
+    "presetName": "预设名称",
+    "loops": "线路",
+    "midiMessages": "MIDI 消息",
+    "add": "+ 添加",
+    "noMessages": "暂无 MIDI 消息配置",
+    "addFirst": "添加你的第一条消息",
+    "exportTitle": "导出预设",
+    "exportDesc": "将你的预设配置下载为 JSON 文件。",
+    "download": "下载",
+    "close": "关闭",
+    "importTitle": "导入预设",
+    "importDesc": "在下方粘贴你的预设 JSON。",
+    "importBtn": "导入"
+  },
+  "store": {
+    "hero": {
+      "title": "产品列表",
+      "subtitle": "为追求极致掌控的音乐人打造的精密 MIDI 控制器。"
+    },
+    "product": {
+      "comingSoon": "即将上市",
+      "addToCart": "加入购物车",
+      "notifyMe": "到货通知"
+    },
+    "cart": {
+      "items": "件商品在购物车中",
+      "checkout": "结算"
+    }
+  },
+  "lab": {
+    "hero": {
+      "title": "实验室",
+      "subtitle": "深入探索 MIDI 技术、教程，以及效果控制器领域的前沿洞察。"
+    },
+    "newsletter": {
+      "title": "保持关注",
+      "subtitle": "新文章发布时第一时间通知你。",
+      "subscribe": "订阅"
+    }
+  },
+  "support": {
+    "hero": {
+      "title": "支持中心",
+      "subtitle": "查找答案、下载资源、获取 LdA 设备的帮助。"
+    },
+    "quickLinks": {
+      "downloads": "下载",
+      "docs": "文档",
+      "email": "邮件",
+      "faq": "常见问题"
+    },
+    "faq": {
+      "title": "常见问题"
+    },
+    "cta": {
+      "title": "需要更多帮助？",
+      "subtitle": "找不到你要的内容？联系我们的团队。",
+      "button": "联系我们"
+    }
+  },
+  "downloads": {
+    "hero": {
+      "title": "下载中心",
+      "subtitle": "你的 LdA 设备手册、指南和资源。"
+    },
+    "download": "下载"
+  },
+  "gallery": {
+    "hero": {
+      "title": "图集",
+      "subtitle": "艺术家的效果器设置、产品摄影，以及 LdA 社区的精彩瞬间。"
+    },
+    "filter": {
+      "all": "全部",
+      "product": "产品",
+      "setup": "设备",
+      "live": "现场",
+      "studio": "工作室"
+    },
+    "cta": {
+      "title": "分享你的设备",
+      "subtitle": "有用 LdA 设备的照片？提交上来，有机会登上我们的图集。",
+      "button": "提交照片"
+    }
+  },
+  "terms": {
+    "title": "退货条款",
+    "sections": {
+      "policy": {
+        "heading": "30 天退货政策",
+        "text": "我们对所有保持原状的产品提供 30 天退货政策。如果你不满意，在 30 天内退货即可获得全额退款。"
+      },
+      "eligibility": {
+        "heading": "退货条件",
+        "items": [
+          "产品必须保持原始包装",
+          "所有配件必须齐全",
+          "产品不得有使用痕迹",
+          "需提供购买凭证"
+        ]
+      },
+      "howToReturn": {
+        "heading": "退货流程",
+        "steps": [
+          "联系 support@logicdesaudio.com 申请退货",
+          "将产品妥善包装于原包装中",
+          "按我们团队提供的地址发货",
+          "收到产品后 14 天内处理退款"
+        ]
+      },
+      "shipping": {
+        "heading": "运费说明",
+        "text": "除非产品存在缺陷，否则退货运费由顾客承担。"
+      },
+      "defective": {
+        "heading": "缺陷产品",
+        "text": "若产品到货时存在缺陷，请立即联系我们换货。我们将承担全部运费。"
+      }
+    },
+    "back": "← 返回首页"
+  },
+  "privacy": {
+    "title": "隐私政策",
+    "sections": {
+      "dataCollect": {
+        "heading": "我们收集的数据",
+        "intro": "我们仅收集订单处理和产品支持所必需的最少数据：",
+        "items": [
+          "邮箱地址（用于订单更新和 newsletter）",
+          "收货和账单地址",
+          "支付信息（通过 Stripe 安全处理）",
+          "设备信息（用于产品支持）"
+        ]
+      },
+      "dataUse": {
+        "heading": "数据使用方式",
+        "items": [
+          "处理和履行订单",
+          "提供客户支持",
+          "发送产品更新（如已订阅）",
+          "改进我们的产品和服务"
+        ]
+      },
+      "dataSharing": {
+        "heading": "数据共享",
+        "intro": "我们不出售你的个人数据。我们仅在以下情况下共享数据：",
+        "items": [
+          "与支付处理方（Stripe）共享交易信息",
+          "与物流合作伙伴共享配送信息",
+          "在法律要求时与相关部门共享"
+        ]
+      },
+      "cookies": {
+        "heading": "Cookie",
+        "text": "我们使用必要的 Cookie 以确保网站正常运行。你可以在浏览器设置中禁用 Cookie。"
+      },
+      "rights": {
+        "heading": "你的权利",
+        "items": [
+          "访问你的数据",
+          "申请删除数据",
+          "退订 newsletter",
+          "导出你的数据"
+        ]
+      },
+      "contact": {
+        "heading": "联系我们",
+        "text": "有问题？发送邮件至 privacy@logicdesaudio.com"
+      }
+    },
+    "back": "← 返回首页"
+  }
+}

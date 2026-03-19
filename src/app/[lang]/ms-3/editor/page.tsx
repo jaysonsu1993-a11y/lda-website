@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
+import { useLanguage, useLocalizedPath } from "@/context/LanguageContext";
 import { useState } from "react";
 
 // Simplified MIDI message types
@@ -14,7 +16,7 @@ const MSG_TYPES = [
 
 interface MidiMessage {
   id: string;
-  channel: number; // 1-16, 0 = omni
+  channel: number;
   msgType: string;
   param1: number;
   param2: number;
@@ -29,15 +31,14 @@ interface Preset {
   midiMessages: MidiMessage[];
 }
 
-// Generate unique ID
 const generateId = () => Math.random().toString(36).substring(2, 9);
 
-// Note names for dropdown
 const NOTE_NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
-export default function Ms3Editor() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activePreset, setActivePreset] = useState(1);
+export default function Ms3FullEditor() {
+  const { t } = useLanguage();
+  const path = useLocalizedPath();
+  const [selectedPreset, setSelectedPreset] = useState(1);
   const [presets, setPresets] = useState<Preset[]>(
     Array.from({ length: 9 }, (_, i) => ({
       id: i + 1,
@@ -48,7 +49,6 @@ export default function Ms3Editor() {
       midiMessages: [],
     }))
   );
-  const [selectedPreset, setSelectedPreset] = useState(1);
   const [showExport, setShowExport] = useState(false);
   const [showImport, setShowImport] = useState(false);
   const [importText, setImportText] = useState("");
@@ -56,7 +56,7 @@ export default function Ms3Editor() {
   const currentPreset = presets[selectedPreset - 1];
 
   const updatePreset = (updates: Partial<Preset>) => {
-    setPresets(presets.map(p => 
+    setPresets(presets.map(p =>
       p.id === selectedPreset ? { ...p, ...updates } : p
     ));
   };
@@ -104,8 +104,6 @@ export default function Ms3Editor() {
         setPresets(parsed);
         setShowImport(false);
         setImportText("");
-      } else {
-        console.error("Invalid format. Expected 9 presets.");
       }
     } catch {
       console.error("Invalid JSON format.");
@@ -120,107 +118,32 @@ export default function Ms3Editor() {
 
   return (
     <main className="min-h-screen bg-[#131212] text-white w-full">
-      {/* Top Banner */}
-      <div className="bg-[#1a1a1a] text-center py-2 text-sm w-full">
-        <a href="#" className="hover:underline">FREE worldwide shipping on orders over $200.</a>
-      </div>
+      <Navigation />
 
-      {/* Navigation */}
-      <nav className="flex items-center justify-between px-4 md:px-8 lg:px-12 py-4 border-b border-[#333] w-full relative">
-        <button 
-          className="md:hidden text-white p-2"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            {mobileMenuOpen ? (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            )}
-          </svg>
-        </button>
-
-        <div className="hidden md:flex items-center gap-4 md:gap-8">
-          <Link href="/" className="text-xs md:text-sm uppercase tracking-widest hover:text-gray-400">
-            CATALOG
-          </Link>
-          <Link href="/store" className="text-xs md:text-sm uppercase tracking-widest hover:text-gray-400">
-            STORE
-          </Link>
-          <Link href="/lab" className="text-xs md:text-sm uppercase tracking-widest hover:text-gray-400">
-            LAB
-          </Link>
-        </div>
-        
-        <Link href="/" className="absolute left-1/2 transform -translate-x-1/2">
-          <Image 
-            src="/lda-logo.png" 
-            alt="Logic des Audio" 
-            width={120} 
-            height={50}
-            className="h-10 md:h-14 lg:h-16 w-auto object-contain"
-          />
-        </Link>
-        
-        <div className="hidden md:flex items-center gap-4 md:gap-8">
-          <Link href="/editor" className="text-xs md:text-sm uppercase tracking-widest hover:text-gray-400">
-            EDITOR
-          </Link>
-          <Link href="#" className="text-xs md:text-sm uppercase tracking-widest hover:text-gray-400">
-            SUPPORT
-          </Link>
-          <button className="text-xs md:text-sm uppercase tracking-widest hover:text-gray-400">
-            LANGUAGE
-          </button>
-        </div>
-
-        {mobileMenuOpen && (
-          <div className="absolute top-full left-0 right-0 bg-[#1a1a1a] border-b border-[#333] py-4 md:hidden z-50">
-            <div className="flex flex-col items-center gap-4">
-              <Link href="/" className="text-xs uppercase tracking-widest hover:text-gray-400" onClick={() => setMobileMenuOpen(false)}>
-                CATALOG
-              </Link>
-              <Link href="/store" className="text-xs uppercase tracking-widest hover:text-gray-400" onClick={() => setMobileMenuOpen(false)}>
-                STORE
-              </Link>
-              <Link href="/lab" className="text-xs uppercase tracking-widest hover:text-gray-400" onClick={() => setMobileMenuOpen(false)}>
-                LAB
-              </Link>
-              <Link href="/editor" className="text-xs uppercase tracking-widest hover:text-gray-400" onClick={() => setMobileMenuOpen(false)}>
-                EDITOR
-              </Link>
-              <Link href="#" className="text-xs uppercase tracking-widest hover:text-gray-400" onClick={() => setMobileMenuOpen(false)}>
-                SUPPORT
-              </Link>
-            </div>
-          </div>
-        )}
-      </nav>
-
-      {/* Editor Section */}
       <section className="px-4 md:px-8 lg:px-12 py-8 w-full">
         <div className="max-w-full mx-auto w-full">
+          {/* Header */}
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8">
             <div>
-              <Link href="/ms-3" className="text-sm text-gray-400 hover:text-white mb-2 inline-block">
-                ← Back to MS-3
+              <Link href={path("/ms-3")} className="text-sm text-gray-400 hover:text-white mb-2 inline-block">
+                {t.editor.back}
               </Link>
-              <h1 className="text-2xl md:text-4xl font-bold">MS-3 PRESET EDITOR</h1>
-              <p className="text-gray-400">Configure your presets and MIDI messages</p>
+              <h1 className="text-2xl md:text-4xl font-bold">{t.editor.title}</h1>
+              <p className="text-gray-400">{t.editor.subtitle}</p>
             </div>
-            
+
             <div className="flex gap-2">
-              <button 
+              <button
                 onClick={() => setShowExport(true)}
                 className="px-4 py-2 border border-[#333] hover:border-[#00d4ff] text-[#00d4ff] text-sm transition-colors"
               >
-                EXPORT
+                {t.editor.export}
               </button>
-              <button 
+              <button
                 onClick={() => setShowImport(true)}
                 className="px-4 py-2 border border-[#333] hover:border-[#00d4ff] text-[#00d4ff] text-sm transition-colors"
               >
-                IMPORT
+                {t.editor.import}
               </button>
             </div>
           </div>
@@ -247,12 +170,12 @@ export default function Ms3Editor() {
             <div className="bg-[#1a1a1a] p-6 border border-[#333]">
               <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
                 <span className="text-[#00d4ff]">●</span>
-                Preset {selectedPreset}
+                {t.editor.preset} {selectedPreset}
               </h2>
-              
+
               <div className="space-y-4">
                 <div>
-                  <label className="text-sm text-gray-400 block mb-2">Preset Name</label>
+                  <label className="text-sm text-gray-400 block mb-2">{t.editor.presetName}</label>
                   <input
                     type="text"
                     value={currentPreset.name}
@@ -263,7 +186,7 @@ export default function Ms3Editor() {
                 </div>
 
                 <div>
-                  <label className="text-sm text-gray-400 block mb-3">Loops</label>
+                  <label className="text-sm text-gray-400 block mb-3">{t.editor.loops}</label>
                   <div className="flex gap-3">
                     {[1, 2, 3].map(loop => (
                       <button
@@ -291,34 +214,34 @@ export default function Ms3Editor() {
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-bold flex items-center gap-2">
                   <span className="text-[#00d4ff]">●</span>
-                  MIDI Messages
+                  {t.editor.midiMessages}
                 </h2>
                 <button
                   onClick={addMidiMessage}
                   className="px-4 py-2 bg-[#00d4ff] text-black text-sm font-bold hover:bg-[#00b8e0] transition-colors"
                 >
-                  + ADD
+                  {t.editor.add}
                 </button>
               </div>
 
               {currentPreset.midiMessages.length === 0 ? (
                 <div className="text-center py-12 text-gray-500">
-                  <p className="mb-4">No MIDI messages configured</p>
+                  <p className="mb-4">{t.editor.noMessages}</p>
                   <button
                     onClick={addMidiMessage}
                     className="text-[#00d4ff] hover:underline"
                   >
-                    Add your first message
+                    {t.editor.addFirst}
                   </button>
                 </div>
               ) : (
                 <div className="space-y-3 max-h-[400px] overflow-y-auto">
                   {currentPreset.midiMessages.map((msg, index) => {
-                    const msgTypeInfo = MSG_TYPES.find(t => t.name === msg.msgType) || MSG_TYPES[0];
+                    const msgTypeInfo = MSG_TYPES.find(ty => ty.name === msg.msgType) || MSG_TYPES[0];
                     return (
                       <div key={msg.id} className="bg-[#0d0d0d] p-4 border border-[#333] flex flex-wrap items-center gap-3">
                         <span className="text-gray-500 text-sm font-mono">{index + 1}.</span>
-                        
+
                         {/* Channel */}
                         <select
                           value={msg.channel}
@@ -359,7 +282,7 @@ export default function Ms3Editor() {
                             <input
                               type="number"
                               min="0"
-                              max={msg.msgType === "PC" ? 127 : msg.msgType === "CC" ? 127 : 127}
+                              max="127"
                               value={msg.param1}
                               onChange={(e) => updateMidiMessage(msg.id, { param1: Math.max(0, Math.min(127, parseInt(e.target.value) || 0)) })}
                               className="w-16 bg-[#1a1a1a] border border-[#333] px-2 py-1 text-white text-sm"
@@ -403,22 +326,14 @@ export default function Ms3Editor() {
       {showExport && (
         <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
           <div className="bg-[#1a1a1a] border border-[#333] p-6 max-w-lg w-full">
-            <h3 className="text-xl font-bold mb-4">Export Presets</h3>
-            <p className="text-gray-400 text-sm mb-4">
-              Download your preset configuration as a JSON file.
-            </p>
+            <h3 className="text-xl font-bold mb-4">{t.editor.exportTitle}</h3>
+            <p className="text-gray-400 text-sm mb-4">{t.editor.exportDesc}</p>
             <div className="flex gap-3">
-              <button
-                onClick={exportConfig}
-                className="flex-1 py-3 bg-[#00d4ff] text-black font-bold"
-              >
-                DOWNLOAD
+              <button onClick={exportConfig} className="flex-1 py-3 bg-[#00d4ff] text-black font-bold">
+                {t.editor.download}
               </button>
-              <button
-                onClick={() => setShowExport(false)}
-                className="px-6 py-3 border border-[#333] text-white"
-              >
-                CLOSE
+              <button onClick={() => setShowExport(false)} className="px-6 py-3 border border-[#333] text-white">
+                {t.editor.close}
               </button>
             </div>
           </div>
@@ -429,10 +344,8 @@ export default function Ms3Editor() {
       {showImport && (
         <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
           <div className="bg-[#1a1a1a] border border-[#333] p-6 max-w-lg w-full">
-            <h3 className="text-xl font-bold mb-4">Import Presets</h3>
-            <p className="text-gray-400 text-sm mb-4">
-              Paste your preset JSON below.
-            </p>
+            <h3 className="text-xl font-bold mb-4">{t.editor.importTitle}</h3>
+            <p className="text-gray-400 text-sm mb-4">{t.editor.importDesc}</p>
             <textarea
               value={importText}
               onChange={(e) => setImportText(e.target.value)}
@@ -440,63 +353,18 @@ export default function Ms3Editor() {
               className="w-full h-40 bg-[#0d0d0d] border border-[#333] p-3 text-white font-mono text-sm mb-4"
             />
             <div className="flex gap-3">
-              <button
-                onClick={importConfig}
-                className="flex-1 py-3 bg-[#00d4ff] text-black font-bold"
-              >
-                IMPORT
+              <button onClick={importConfig} className="flex-1 py-3 bg-[#00d4ff] text-black font-bold">
+                {t.editor.importBtn}
               </button>
-              <button
-                onClick={() => { setShowImport(false); setImportText(""); }}
-                className="px-6 py-3 border border-[#333] text-white"
-              >
-                CLOSE
+              <button onClick={() => { setShowImport(false); setImportText(""); }} className="px-6 py-3 border border-[#333] text-white">
+                {t.editor.close}
               </button>
             </div>
           </div>
         </div>
       )}
 
-      {/* Footer */}
-      <footer className="border-t border-[#333] px-4 md:px-8 lg:px-12 py-8 md:py-12 mt-8 md:mt-12 w-full">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-full mx-auto w-full">
-          <div>
-            <h3 className="text-lg font-bold mb-4">EMAIL NEWSLETTER</h3>
-            <p className="text-sm text-gray-400 mb-4">Get 10% off your first merchandise order.</p>
-          </div>
-          <div>
-            <h3 className="text-lg font-bold mb-4">MISSION</h3>
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li>Responsible Design</li>
-              <li>Responsible Manufacture</li>
-              <li>Creativity</li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-lg font-bold mb-4">TERMS & POLICY</h3>
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li>Return Terms</li>
-              <li>Privacy Policy</li>
-              <li>Copyright</li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-lg font-bold mb-4">CONTACT</h3>
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li>YouTube</li>
-              <li>Email</li>
-              <li>WeChat</li>
-              <li>Instagram</li>
-              <li>TikTok</li>
-            </ul>
-          </div>
-        </div>
-        <div className="text-center mt-8 md:mt-12 text-sm text-gray-500">
-          ©2025 Logic des Audio
-          <br />
-          <span className="text-xs">粤ICP备2025509252号-1</span>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }

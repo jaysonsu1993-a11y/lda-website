@@ -1,0 +1,273 @@
+{
+  "nav": {
+    "catalog": "CATALOG",
+    "store": "STORE",
+    "lab": "LAB",
+    "editor": "EDITOR",
+    "support": "SUPPORT",
+    "language": "LANGUAGE",
+    "gallery": "Gallery",
+    "downloads": "Downloads"
+  },
+  "banner": {
+    "shipping": "FREE worldwide shipping on orders over $200."
+  },
+  "home": {
+    "hero": {
+      "midiSwitcher": "MIDI SWITCHER",
+      "loopSwitcher": "LOOP SWITCHER",
+      "availableNow": "AVAILABLE NOW",
+      "comingSoon": "COMING SOON",
+      "getFullyControl": "GET FULLY CONTROL OF",
+      "yourEffectChain": "YOUR EFFECT CHAIN",
+      "explore": "EXPLORE"
+    },
+    "explore": {
+      "pedals": "WHAT'S ON PEDALS?",
+      "boards": "WHAT'S ON BOARDS?",
+      "customShop": "LdA CUSTOM",
+      "shop": "SHOP",
+      "midiLibrary": "MIDI",
+      "library": "LIBRARY",
+      "gallery": "Gallery",
+      "downloads": "Downloads"
+    }
+  },
+  "footer": {
+    "newsletter": {
+      "title": "EMAIL NEWSLETTER",
+      "subtitle": "Get 10% off your first merchandise order.",
+      "placeholder": "email",
+      "submit": "SUBMIT"
+    },
+    "mission": {
+      "title": "MISSION",
+      "design": "Responsible Design",
+      "manufacture": "Responsible Manufacture",
+      "creativity": "Creativity"
+    },
+    "terms": {
+      "title": "TERMS & POLICY",
+      "return": "Return Terms",
+      "privacy": "Privacy Policy",
+      "copyright": "Copyright"
+    },
+    "contact": {
+      "title": "CONTACT",
+      "youtube": "YouTube",
+      "email": "Email",
+      "wechat": "WeChat",
+      "instagram": "Instagram",
+      "tiktok": "TikTok"
+    },
+    "copyright": "©2025 Logic des Audio"
+  },
+  "ms3": {
+    "product": {
+      "midiSwitcher": "MIDI SWITCHER",
+      "availableNow": "AVAILABLE NOW",
+      "description": "Professional MIDI switcher with 3 loops, 9 presets, and USB/MIDI connectivity. Perfect for controlling your entire pedalboard with a single device.",
+      "buyNow": "BUY NOW — $299",
+      "configure": "CONFIGURE",
+      "specs": "Specifications",
+      "loops": "Loops",
+      "presets": "Presets",
+      "midiChannels": "MIDI Channels",
+      "connectivity": "Connectivity"
+    },
+    "features": {
+      "title": "KEY FEATURES",
+      "loops": {
+        "title": "3 Effect Loops",
+        "desc": "True bypass loops for your effects pedals"
+      },
+      "presets": {
+        "title": "9 Presets",
+        "desc": "Store and recall your favorite setups instantly"
+      },
+      "midi": {
+        "title": "MIDI Control",
+        "desc": "Full MIDI program change and CC control"
+      }
+    }
+  },
+  "editor": {
+    "title": "MS-3 PRESET EDITOR",
+    "subtitle": "Configure your presets and MIDI messages",
+    "back": "← Back to MS-3",
+    "export": "EXPORT",
+    "import": "IMPORT",
+    "preset": "Preset",
+    "presetName": "Preset Name",
+    "loops": "Loops",
+    "midiMessages": "MIDI Messages",
+    "add": "+ ADD",
+    "noMessages": "No MIDI messages configured",
+    "addFirst": "Add your first message",
+    "exportTitle": "Export Presets",
+    "exportDesc": "Download your preset configuration as a JSON file.",
+    "download": "DOWNLOAD",
+    "close": "CLOSE",
+    "importTitle": "Import Presets",
+    "importDesc": "Paste your preset JSON below.",
+    "importBtn": "IMPORT"
+  },
+  "store": {
+    "hero": {
+      "title": "OUR PRODUCTS",
+      "subtitle": "Precision MIDI controllers built for musicians who demand full control."
+    },
+    "product": {
+      "comingSoon": "COMING SOON",
+      "addToCart": "ADD TO CART",
+      "notifyMe": "NOTIFY ME"
+    },
+    "cart": {
+      "items": "item(s) in cart",
+      "checkout": "CHECKOUT"
+    }
+  },
+  "lab": {
+    "hero": {
+      "title": "THE LAB",
+      "subtitle": "Deep dives into MIDI technology, tutorials, and insights from the world of effect controllers."
+    },
+    "newsletter": {
+      "title": "STAY UPDATED",
+      "subtitle": "Get notified when new articles drop.",
+      "subscribe": "SUBSCRIBE"
+    }
+  },
+  "support": {
+    "hero": {
+      "title": "SUPPORT",
+      "subtitle": "Find answers, download resources, and get help with your LdA equipment."
+    },
+    "quickLinks": {
+      "downloads": "DOWNLOADS",
+      "docs": "DOCS",
+      "email": "EMAIL",
+      "faq": "FAQ"
+    },
+    "faq": {
+      "title": "FREQUENTLY ASKED"
+    },
+    "cta": {
+      "title": "STILL NEED HELP?",
+      "subtitle": "Can't find what you're looking for? Reach out to our team.",
+      "button": "CONTACT US"
+    }
+  },
+  "downloads": {
+    "hero": {
+      "title": "DOWNLOADS",
+      "subtitle": "Manuals, guides, and resources for your LdA devices."
+    },
+    "download": "DOWNLOAD"
+  },
+  "gallery": {
+    "hero": {
+      "title": "GALLERY",
+      "subtitle": "Artist setups, product photography, and moments from the LdA community."
+    },
+    "filter": {
+      "all": "All",
+      "product": "Product",
+      "setup": "Setup",
+      "live": "Live",
+      "studio": "Studio"
+    },
+    "cta": {
+      "title": "SHARE YOUR SETUP",
+      "subtitle": "Got a photo of your LdA gear? Submit it for a chance to be featured.",
+      "button": "SUBMIT PHOTO"
+    }
+  },
+  "terms": {
+    "title": "RETURN TERMS",
+    "sections": {
+      "policy": {
+        "heading": "30-DAY RETURN POLICY",
+        "text": "We offer a 30-day return policy for all products in original condition. If you're not satisfied, return within 30 days for a full refund."
+      },
+      "eligibility": {
+        "heading": "ELIGIBILITY",
+        "items": [
+          "Product must be in original packaging",
+          "All accessories must be included",
+          "Product must show no signs of use",
+          "Proof of purchase required"
+        ]
+      },
+      "howToReturn": {
+        "heading": "HOW TO RETURN",
+        "steps": [
+          "Contact support@logicdesaudio.com to request a return",
+          "Pack product securely in original packaging",
+          "Ship to the address provided by our team",
+          "Refunds processed within 14 days of receipt"
+        ]
+      },
+      "shipping": {
+        "heading": "SHIPPING COSTS",
+        "text": "Customer is responsible for return shipping costs unless the product is defective."
+      },
+      "defective": {
+        "heading": "DEFECTIVE PRODUCTS",
+        "text": "If your product arrives defective, contact us immediately for a replacement. We'll cover all shipping costs."
+      }
+    },
+    "back": "← BACK TO HOME"
+  },
+  "privacy": {
+    "title": "PRIVACY POLICY",
+    "sections": {
+      "dataCollect": {
+        "heading": "DATA WE COLLECT",
+        "intro": "We collect minimal data necessary for order processing and product support:",
+        "items": [
+          "Email address (for order updates and newsletter)",
+          "Shipping and billing address",
+          "Payment information (processed securely via Stripe)",
+          "Device information for product support"
+        ]
+      },
+      "dataUse": {
+        "heading": "HOW WE USE DATA",
+        "items": [
+          "Process and fulfill orders",
+          "Provide customer support",
+          "Send product updates (if subscribed)",
+          "Improve our products and services"
+        ]
+      },
+      "dataSharing": {
+        "heading": "DATA SHARING",
+        "intro": "We do not sell your personal data. We share data only with:",
+        "items": [
+          "Payment processors (Stripe) for transactions",
+          "Shipping partners for delivery",
+          "Legal authorities when required"
+        ]
+      },
+      "cookies": {
+        "heading": "COOKIES",
+        "text": "We use essential cookies for site functionality. You can disable cookies in your browser settings."
+      },
+      "rights": {
+        "heading": "YOUR RIGHTS",
+        "items": [
+          "Access your data",
+          "Request data deletion",
+          "Opt-out of newsletter",
+          "Export your data"
+        ]
+      },
+      "contact": {
+        "heading": "CONTACT",
+        "text": "Questions? Email us at privacy@logicdesaudio.com"
+      }
+    },
+    "back": "← BACK TO HOME"
+  }
+}
